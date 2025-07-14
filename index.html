@@ -1,2 +1,55 @@
-<h2>A new game is available.</h2>
-<iframe height="167" frameborder="0" src="https://itch.io/embed/3719959" width="552"><a href="https://alexcreation2009.itch.io/dodge-the-creeps">Dodge the Creeps by CreationGames</a></iframe>
+
+<!DOCTYPE html>
+<html lang="en">
+<head>
+    <meta charset="UTF-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <title data-translate="title">Blog Site</title>
+    <link href="style.css" rel="stylesheet" type="text/css" />
+</head>
+<body>
+    <header>
+        <div class="container">
+            <h1 data-translate="blog_title">My Blog</h1>
+            <div class="language-switch">
+                <button onclick="switchLanguage('en')" class="lang-btn active" id="en-btn">EN</button>
+                <button onclick="switchLanguage('ru')" class="lang-btn" id="ru-btn">RU</button>
+            </div>
+        </div>
+    </header>
+
+    <main class="container">
+        <div class="blog-controls">
+            <button onclick="showNewPostForm()" class="btn btn-primary" data-translate="new_post">New Post</button>
+        </div>
+
+        <!-- New Post Form -->
+        <div id="newPostForm" class="post-form hidden">
+            <h2 data-translate="create_post">Create New Post</h2>
+            <form id="postForm">
+                <input type="text" id="postTitle" placeholder="Post Title" data-translate-placeholder="post_title" required>
+                <textarea id="postContent" placeholder="Post Content" data-translate-placeholder="post_content" required></textarea>
+                <div class="file-upload">
+                    <label for="postImage" data-translate="upload_image">Upload Image:</label>
+                    <input type="file" id="postImage" accept="image/*">
+                </div>
+                <div class="file-upload">
+                    <label for="postFiles" data-translate="upload_files">Upload Files:</label>
+                    <input type="file" id="postFiles" multiple>
+                </div>
+                <div class="form-actions">
+                    <button type="submit" class="btn btn-primary" data-translate="publish">Publish</button>
+                    <button type="button" onclick="hideNewPostForm()" class="btn btn-secondary" data-translate="cancel">Cancel</button>
+                </div>
+            </form>
+        </div>
+
+        <!-- Blog Posts -->
+        <div id="blogPosts" class="posts-container">
+            <!-- Posts will be dynamically added here -->
+        </div>
+    </main>
+
+    <script src="script.js"></script>
+</body>
+</html>
