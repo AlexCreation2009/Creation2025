@@ -2,54 +2,83 @@
 <!DOCTYPE html>
 <html lang="en">
 <head>
-    <meta charset="UTF-8">
-    <meta name="viewport" content="width=device-width, initial-scale=1.0">
-    <title data-translate="title">Blog Site</title>
-    <link href="style.css" rel="stylesheet" type="text/css" />
+  <meta charset="utf-8">
+  <meta name="viewport" content="width=device-width, initial-scale=1.0">
+  <title>My Blog</title>
+  <link href="style.css" rel="stylesheet" type="text/css" />
 </head>
 <body>
-    <header>
-        <div class="container">
-            <h1 data-translate="blog_title">My Blog</h1>
-            <div class="language-switch">
-                <button onclick="switchLanguage('en')" class="lang-btn active" id="en-btn">EN</button>
-                <button onclick="switchLanguage('ru')" class="lang-btn" id="ru-btn">RU</button>
+  <header class="header">
+    <div class="container">
+      <h1 class="logo">My Blog</h1>
+      <div class="language-switcher">
+        <button id="langEn" class="lang-btn active">EN</button>
+        <button id="langRu" class="lang-btn">RU</button>
+      </div>
+    </div>
+  </header>
+
+  <main class="container">
+    <div class="blog-actions">
+      <button id="newPostBtn" class="btn btn-primary" data-en="New Post" data-ru="Новый пост">New Post</button>
+    </div>
+
+    <div id="posts-container" class="posts-container">
+      <!-- Posts will be dynamically loaded here -->
+    </div>
+
+    <!-- New Post Modal -->
+    <div id="postModal" class="modal">
+      <div class="modal-content">
+        <div class="modal-header">
+          <h2 data-en="Create New Post" data-ru="Создать новый пост">Create New Post</h2>
+          <span class="close">&times;</span>
+        </div>
+        <div class="modal-body">
+          <form id="postForm">
+            <div class="form-group">
+              <label for="postTitle" data-en="Title" data-ru="Заголовок">Title</label>
+              <input type="text" id="postTitle" required>
             </div>
+            
+            <div class="form-group">
+              <label for="postContent" data-en="Content (Markdown)" data-ru="Содержание (Markdown)">Content (Markdown)</label>
+              <textarea id="postContent" rows="10" placeholder="Write your post in markdown..." required></textarea>
+            </div>
+            
+            <div class="form-group">
+              <label for="postImage" data-en="Image" data-ru="Изображение">Image</label>
+              <input type="file" id="postImage" accept="image/*">
+            </div>
+            
+            <div class="form-group">
+              <label for="postFiles" data-en="Attachments" data-ru="Вложения">Attachments</label>
+              <input type="file" id="postFiles" multiple>
+            </div>
+            
+            <div class="form-actions">
+              <button type="submit" class="btn btn-primary" data-en="Publish Post" data-ru="Опубликовать пост">Publish Post</button>
+              <button type="button" class="btn btn-secondary" id="cancelPost" data-en="Cancel" data-ru="Отмена">Cancel</button>
+            </div>
+          </form>
         </div>
-    </header>
+      </div>
+    </div>
 
-    <main class="container">
-        <div class="blog-controls">
-            <button onclick="showNewPostForm()" class="btn btn-primary" data-translate="new_post">New Post</button>
+    <!-- Post View Modal -->
+    <div id="postViewModal" class="modal">
+      <div class="modal-content">
+        <div class="modal-header">
+          <span class="close">&times;</span>
         </div>
-
-        <!-- New Post Form -->
-        <div id="newPostForm" class="post-form hidden">
-            <h2 data-translate="create_post">Create New Post</h2>
-            <form id="postForm">
-                <input type="text" id="postTitle" placeholder="Post Title" data-translate-placeholder="post_title" required>
-                <textarea id="postContent" placeholder="Post Content" data-translate-placeholder="post_content" required></textarea>
-                <div class="file-upload">
-                    <label for="postImage" data-translate="upload_image">Upload Image:</label>
-                    <input type="file" id="postImage" accept="image/*">
-                </div>
-                <div class="file-upload">
-                    <label for="postFiles" data-translate="upload_files">Upload Files:</label>
-                    <input type="file" id="postFiles" multiple>
-                </div>
-                <div class="form-actions">
-                    <button type="submit" class="btn btn-primary" data-translate="publish">Publish</button>
-                    <button type="button" onclick="hideNewPostForm()" class="btn btn-secondary" data-translate="cancel">Cancel</button>
-                </div>
-            </form>
+        <div class="modal-body" id="postViewContent">
+          <!-- Post content will be loaded here -->
         </div>
+      </div>
+    </div>
+  </main>
 
-        <!-- Blog Posts -->
-        <div id="blogPosts" class="posts-container">
-            <!-- Posts will be dynamically added here -->
-        </div>
-    </main>
-
-    <script src="script.js"></script>
+  <script src="https://cdn.jsdelivr.net/npm/marked/marked.min.js"></script>
+  <script type="module" src="script.js"></script>
 </body>
 </html>
